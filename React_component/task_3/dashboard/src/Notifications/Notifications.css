@@ -1,19 +1,37 @@
 .Notifications {
-	border: 2px dotted var(--holberton-red);
-	padding: 6px 12px;
-	position: relative;
-	margin-top: 12px;
+    border: 1px dashed rgb(233, 53, 53);
+    padding: 10px;
+    margin: 10px 0;
+    position: relative;
+    display: block;
+
 }
 
-.menuItem {
-	text-align: right;
-	font-weight: bold;
+.Notifications button {
+    background-color: transparent;
+    border: none;
+    color: grey;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
 
-li[data-priority-type="default"] {
-	color: blue;
+.Notifications button img {
+    width: 10px;
 }
 
-li[data-priority-type="urgent"] {
-	color: red;
+.Notifications ul {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+.Notifications li[data-priority="default"] {
+    color: blue;
+}
+
+.Notifications li[data-priority="urgent"] {
+    color: red;
 }

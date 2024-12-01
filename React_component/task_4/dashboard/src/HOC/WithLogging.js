@@ -1,24 +1,31 @@
-import React, { Component, Children } from 'react';
+import React, { Component } from 'react';
 
-class WithLogging extends Component {
-	constructor(props) {
-		super(props);
-	};
+// Higher-Order Component (HOC) for logging
+const WithLogging = (WrappedComponent) => {
+    class WithLoggingComponent extends Component {
+        // Log when the component is mounted
+        componentDidMount() {
+            const componentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
+            console.log(`Component ${componentName} is mounted`);
+        }
 
-	componentDidMount() {
-		// console.log(this.props);
-		let compName = this.props.children.type.name || 'Component';
-		console.log(`Component ${compName} is mounted`);
-	};
+        // Log when the component is about to unmount
+        componentWillUnmount() {
+            const componentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
+            console.log(`Component ${componentName} is going to unmount`);
+        }
 
-	componentWillUnmount() {
-		let compName = this.props.children.type.name || 'Component';
-		console.log(`Component ${compName} is going to unmount`);
-	};
+        render() {
+            // Render the wrapped component with all props passed through
+            return <WrappedComponent {...this.props} />;
+        }
+    }
 
-	render() {
-		return (this.props.children);
-	};
+    // Set the displayName for better debugging and React DevTools support
+    const wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
+    WithLoggingComponent.displayName = `WithLogging(${wrappedComponentName})`;
+
+    return WithLoggingComponent;
 };
 
 export default WithLogging;

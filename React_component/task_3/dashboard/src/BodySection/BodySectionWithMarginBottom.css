@@ -1,3 +1,4 @@
-.BodySectionWithMargin {
-	margin-bottom: 40px;
+.bodySectionWithMargin {
+    margin-bottom: 40px;
+    width: 100%;
 }

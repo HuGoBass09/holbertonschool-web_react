@@ -1,42 +1,43 @@
-import React from 'react';
-import chai, { expect } from 'chai';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, mount } from 'enzyme';
-import WithLogging from './WithLogging.js';
-import sinonChai from 'sinon-chai';
-import { spy } from 'sinon';
-import Login from '../Login/Login.js';
+import React, { Component } from 'react';
+import WithLogging from '../HOC/WithLogging';
+import './Login.css';
 
-chai.use(sinonChai);
+describe('WithLogging HOC', () => {
+    let container = null;
+    let consoleLogSpy;
 
-configure({
-	adapter: new Adapter()
-});
+    beforeEach(() => {
+        // Set up a DOM element as a render target
+        container = document.createElement('div');
+        document.body.appendChild(container);
+        // Mock console.log
+        consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => { });
+    });
 
-let log = spy(console, 'log');
+    afterEach(() => {
+        // Clean up on exiting
+        unmountComponentAtNode(container);
+        container.remove();
+        container = null;
+        // Restore console.log
+        consoleLogSpy.mockRestore();
+    });
 
-describe("Testing the <WithLogging /> Component", () => {
+    it('should log on mount and unmount when wrapped element is pure HTML', () => {
+        const WrappedComponent = WithLogging(() => <p />);
+        render(<WrappedComponent />, container);
 
-	it("Renders the correct children with pure html as a child", () => {
-		let wrapper = mount(
-			<WithLogging>
-				<p>simple phrase</p>
-			</WithLogging>
-		);
-		expect(log).to.have.been.calledWith('Component Component is mounted');
-		wrapper.unmount();
-		expect(log).to.have.been.calledWith('Component Component is going to unmount');
-	});
+        expect(consoleLogSpy).toHaveBeenCalledWith('Component is mounted');
+        unmountComponentAtNode(container);
+        expect(consoleLogSpy).toHaveBeenCalledWith('Component is going to unmount');
+    });
 
-	it("Renders the correct children with <Login /> Component as a child", () => {
-		let wrapper = mount(
-			<WithLogging>
-				<Login />
-			</WithLogging>
-		);
-		expect(log).to.have.been.calledWith('Component Login is mounted');
-		wrapper.unmount();
-		expect(log).to.have.been.calledWith('Component Login is going to unmount');
-	});
+    it('should log on mount and unmount with the component name when wrapped element is the Login component', () => {
+        const WrappedLogin = WithLogging(Login);
+        render(<WrappedLogin />, container);
 
+        expect(consoleLogSpy).toHaveBeenCalledWith('Component Login is mounted');
+        unmountComponentAtNode(container);
+        expect(consoleLogSpy).toHaveBeenCalledWith('Component Login is going to unmount');
+    });
 });
