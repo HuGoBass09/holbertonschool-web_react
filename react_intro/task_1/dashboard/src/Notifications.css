@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .Notifications {
+    padding: 45px;
+    border: #e0003c solid 2px;
+    border-style: dashed;
+  }

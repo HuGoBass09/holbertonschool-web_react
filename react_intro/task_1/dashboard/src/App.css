@@ -1,0 +1,33 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App-header{
+  display: flex;
+  border-bottom: #e0003c solid 4px;
+}
+
+.App-header img{
+  width: 200px;
+}
+.App-header h1{
+  display: flex;
+  align-items: center;
+  color: #e0003c;
+}
+
+.App-body{
+  display: flex;
+  padding: 45px;
+  height: 400px;
+  border-bottom: #e0003c solid 4px;
+}
+
+.App-footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
