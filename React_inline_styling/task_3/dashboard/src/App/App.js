@@ -1,12 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import './App.css';
 import Header from '../Header/Header.js';
 import Login from '../Login/Login.js';
 import Footer from '../Footer/Footer.js';
 import Notifications from '../Notifications/Notifications.js';
-import CourseList from '../CourseList/CourseList.js';
-import { getLatestNotification } from '../utils/utils.js';
+import CourseList from '../CourseList/CourseList';
+import { getLatestNotification } from '../utils/utils';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom.js';
+import BodySection from '../BodySection/BodySection.js';
+import WithLogging from '../HOC/WithLogging.js';
+import { StyleSheet, css } from 'aphrodite';
 
 class App extends Component {
   constructor(props) {
@@ -81,25 +84,68 @@ class App extends Component {
 
     return (
       <Fragment>
-        <div className="App">
-          <div className="upperside">
+        <div className={css(styles.app)}>
+          <div className={css(styles.upperside)}>
             <Notifications listNotifications={listNotifications} />
             <Header />
           </div>
           {
             isLoggedIn === false &&
-            <Login />
+            <BodySectionWithMarginBottom title="Log in to continue">
+              <Login />
+            </BodySectionWithMarginBottom>
           }
           {
             isLoggedIn === true &&
-            <CourseList listCourses={listCourses} />
+            <BodySectionWithMarginBottom title="Course list">
+              <CourseList listCourses={listCourses} />
+            </BodySectionWithMarginBottom>
           }
+          <BodySection title="News from the school">
+            <p>
+              Labore ut consequat esse nostrud aute exercitation occaecat consequat ad cillum enim et est ex.
+               Qui proident veniam in aute magna occaecat.
+               Esse duis proident aliqua proident eu magna aliqua est exercitation.
+               Cupidatat ex eiusmod et commodo laborum veniam deserunt ad est excepteur cillum laborum.
+            </p>
+          </BodySection>
           <Footer />
         </div>
       </Fragment>
     );  
   };
 };
+
+const styles = StyleSheet.create({
+  app: {
+    position: 'relative',
+    minHeight: '100vh',
+  },
+  upperside: {
+    display: "flex",
+    flexDirection: "row-reverse",
+    width: "100%",
+    borderBottom: `3px solid var(--holberton-red)`,
+    justifyContent: "space-between",
+  }
+});
+
+// const globalStyles = StyleSheet.create({
+//   globals: {
+//     ':root': {
+//       '--holberton-red': '#e1484c',
+//     },
+//     'body': {
+//       maxWidth: '90%',
+//       margin: '0 auto',
+//     },
+//     'div': {
+//       padding: '2px 8px',
+//     },
+//   },
+// });
+
+// css(globalStyles.globals);
 
 App.propTypes = {
   logOut: PropTypes.func,
