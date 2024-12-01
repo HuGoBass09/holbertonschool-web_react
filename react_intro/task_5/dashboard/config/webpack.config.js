@@ -1,45 +1,42 @@
-// task_5/dashboard/config/webpack.config.js
-
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-    entry: './src/index.js',
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'),
-    },
-    devServer: {
-        static: './dist',
-        hot: true,
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                },
-            },
-            {
-                test: /\.(png|jpe?g|gif)$/i,
-                use: [
-                    {
-                        loader: 'file-loader',
-                    },
-                ],
-            },
-            {
-                test: /\.css$/i,
-                use: ['style-loader', 'css-loader'],
-            },
-        ],
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: './dist/index.html',
-        }),
+  mode: "development",
+  devtool: "inline-source-map",
+  entry: "./src/index.js",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+  },
+  devServer: {
+    hot: true,
+    contentBase: path.resolve(__dirname, "dist"),
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./dist/index.html",
+      title: "Holberton Dashboard",
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+        loader: "image-webpack-loader",
+      },
     ],
-    devtool: 'inline-source-map',
+  },
 };
