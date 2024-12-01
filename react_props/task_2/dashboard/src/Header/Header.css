@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .header{
+    display: flex;
+    border-bottom: #e0003c solid 4px;
+  }
+  
+  .header img{
+    width: 200px;
+  }
+  .header h1{
+    display: flex;
+    align-items: center;
+    color: #e0003c;
+  }
