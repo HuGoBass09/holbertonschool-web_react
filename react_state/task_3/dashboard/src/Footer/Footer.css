@@ -1,0 +1,13 @@
+
+.App-footer {
+	font-style: italic;
+	text-align: center;
+	font-size: 25px;
+  }
+
+.trait {
+	border-bottom: 5px solid #E0354B;
+	width: 100%;
+	margin-top: 5px;
+	margin-bottom: 2em;
+  }

@@ -1,0 +1,55 @@
+{
+  "name": "dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config config/webpack.config.js",
+    "start": "webpack-dev-server --mode development --config config/webpack.config.js",
+    "test": "jest",
+    "test-with-logs": "jest --silent=false",
+    "test-watch": "jest --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-react": "^7.24.7",
+    "babel-loader": "^8.3.0",
+    "cheerio": "1.0.0-rc.12",
+    "css-loader": "^5.0.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.8",
+    "file-loader": "^6.2.0",
+    "identity-obj-proxy": "^3.0.0",
+    "image-webpack-loader": "^7.0.1",
+    "jest": "28.1.3",
+    "jest-environment-jsdom": "^28.1.3",
+    "shallow-with-context": "^0.6.0",
+    "style-loader": "^2.0.0",
+    "webpack": "^4.47.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.15.2"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^12.1.5",
+    "@testing-library/user-event": "^13.5.0",
+    "aphrodite": "^2.4.0",
+    "prop-types": "^15.8.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
+    },
+    "setupFiles": [
+      "<rootDir>/config/setupTests.js"
+    ],
+    "testEnvironment": "jsdom"
+  }
+}
